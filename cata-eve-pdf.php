@@ -1,6 +1,9 @@
 <?php
+include("./cnx/swgc-mysql.php");
+require_once("./cls/cls-sistema.php");
+include("./inc/fun-ini.php");
+$url = obtenerURL()."light-eve-det.php?eCodEvento=".$_GET['val'];
 
-$url = $urlServicio."light-eve-det.php?eCodEvento=".$_GET['val'];
 
 
 $html=file_get_contents($url);
@@ -13,7 +16,7 @@ error_reporting(E_ALL);
 $html=str_replace('font-size:14px;','font-size:12px;',$html);
 
 
-
+//echo $html; die();
 
 
 

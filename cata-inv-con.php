@@ -4,6 +4,9 @@ require_once("cls/cls-sistema.php");
 $clSistema = new clSis();
 session_start();
 
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
+
 if($_GET['eCodInventario'])
 {
     mysql_query("DELETE FROM CatInventario WHERE eCodInventario =".$_GET['eCodInventario']);

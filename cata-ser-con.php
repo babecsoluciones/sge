@@ -6,6 +6,9 @@ include("../inc/fun-ini.php");
 $clSistema = new clSis();
 session_start();
 
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
+
 if($_GET['bEliminar']==1)
 {
     

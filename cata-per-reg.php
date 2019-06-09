@@ -27,6 +27,10 @@ if($_POST)
 	}
 	echo '<script>window.location="?tCodSeccion=cata-per-sis";</script>';
 }
+
+$select = mysql_query("SELECT * FROM SisSeccionesPerfiles WHERE tCodSeccion = 'sis-dash-con' AND eCodPerfil = ".($_GET{'val'} ? $_GET{'val'} : 1));
+$rDashboard = mysql_num_rows($select) ? 'checked="checked"' : '';
+$rPerDash = mysql_fetch_array($select);
 ?>
 
 <script>
@@ -83,13 +87,13 @@ funcion validar()
                                             <table class="table table-borderless table-striped">
                                                 <tbody>
                                                     <tr>
-                                                        <td width="16"><input type="checkbox" id="secciones[0][tCodSeccion]" name="secciones[0][tCodSeccion]" value="sis-dash-con" checked></td>
+                                                        <td width="16"><input type="checkbox" id="secciones[0][tCodSeccion]" name="secciones[0][tCodSeccion]" value="sis-dash-con" <?=$rDashboard;?>></td>
                                                         <td colspan="2">Dashboard</td>
 														<td align="right">
-															<label>A <input type="checkbox" name="secciones[0][bAll]" value="1" checked></label>
+															<label>A <input type="checkbox" name="secciones[0][bAll]" value="1" <?=$rPerDash{'bAll'} ? 'checked' : ''?> ></label>
                                                         </td>
                                                         <td align="right">
-															<label>D <input type="checkbox" name="secciones[0][bDelete]" value="1" checked></label>
+															<label>D <input type="checkbox" name="secciones[0][bDelete]" value="1" <?=$rPerDash{'bDelete'} ? 'checked' : ''?>></label>
                                                         </td>
 														
                                                     </tr>

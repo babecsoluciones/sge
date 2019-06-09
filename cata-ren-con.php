@@ -5,8 +5,8 @@ include("../inc/fun-ini.php");
 
 $clSistema = new clSis();
 session_start();
-$bAll = $clSistema->validarPermiso(obtenerScript());
-$bDelete = $clSistema->validarEliminacion(obtenerScript());
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
 
 if($_GET['eCodEvento'])
 {

@@ -18,7 +18,8 @@ require_once("../cls/cls-sistema.php");
 $clSistema = new clSis();
 session_start();
 
-$bAll = $clSistema->validarPermiso(obtenerScript());
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
 
 function detalle($eCodEvento)
 {
@@ -183,7 +184,7 @@ $select = "SELECT be.*, cc.tNombres nombreCliente, cc.tApellidos apellidosClient
                                                         be.fhFechaEvento >= '$fhFechaInicio' AND be.fhFechaEvento<='$fhFechaTermino'".
                                                         " AND be.eCodEstatus<>4".
                                                         " AND be.eCodTipoDocumento=1".
-												        ($_SESSION['sessionAdmin'][0]['bAll'] ? "" : " AND cc.eCodUsuario = ".$_SESSION['sessionAdmin'][0]['eCodUsuario']).
+												        ($bAll ? "" : " AND cc.eCodUsuario = ".$_SESSION['sessionAdmin'][0]['eCodUsuario']).
 														" ORDER BY be.fhFechaEvento DESC";
 
 

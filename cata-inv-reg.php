@@ -189,6 +189,8 @@ var ePiezas = document.getElementById("ePiezas");
               <label>Imagen</label>
               <input type="file" class="form-control" name="tArchivo" id="tArchivo" onchange="readURL(this,'tImagen')">
 			   <input type="hidden" id="tImagen" name="tImagen" value="<?=base64_decode($rPublicacion{'tImagen'})?>">
+               <input type="hidden" id="tFichero" name="tFichero" value="<?=$rPublicacion{'tImagen'}?>">
+               <input type="hidden" id="bFichero" name="bFichero" value="<?=$rPublicacion{'tImagen'} ? 1 : 0?>">
            </div>
            
                                         <!--campos-->

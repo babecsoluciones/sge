@@ -11,6 +11,9 @@ if (isset($_SERVER{'HTTP_ORIGIN'})) {
         header('Access-Control-Max-Age: 86400');    // cache for 1 day
     }
 
+
+session_start();
+
 include("../cnx/swgc-mysql.php");
 include("../inc/fun-ini.php");
 require_once("../cls/cls-sistema.php");
@@ -18,11 +21,10 @@ require_once("../cls/cls-sistema.php");
 $clSistema = new clSis();
 session_start();
 
-$bAll = $clSistema->validarPermiso(obtenerScript());
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
 
 date_default_timezone_set('America/Mexico_City');
-
-session_start();
 
 $errores = array();
 
@@ -30,6 +32,7 @@ $eventos = array();
 $rentas = array();
 
 $data = json_decode( file_get_contents('php://input') );
+
 
 //Fechas
 $fhFechaInicio = $data->fhFechaConsulta ? date('Y-m-d',strtotime($data->fhFechaConsulta)).' 00:00:00' : date('Y-m-d').' 00:00:00';
@@ -44,8 +47,11 @@ $select = "SELECT be.*, cc.tNombres nombreCliente, cc.tApellidos apellidosClient
                                                         be.fhFechaEvento >= '$fhFechaInicio' AND be.fhFechaEvento<='$fhFechaTermino'".
                                                         " AND be.eCodEstatus<>4".
                                                         " AND be.eCodTipoDocumento=1".
-												        ($_SESSION['sessionAdmin'][0]['bAll'] ? "" : " AND cc.eCodUsuario = ".$_SESSION['sessionAdmin'][0]['eCodUsuario']).
+												        ($bAll ? "" : " AND cc.eCodUsuario = ".$_SESSION['sessionAdmin'][0]['eCodUsuario']).
 														" ORDER BY be.fhFechaEvento DESC";
+
+
+
 
 
 $rsEventos = mysql_query($select);
@@ -98,6 +104,8 @@ $select = "SELECT be.*, cc.tNombres nombreCliente, cc.tApellidos apellidosClient
                                                         " AND be.eCodTipoDocumento=2".
 												        ($bAll ? "" : " AND cc.eCodUsuario = ".$_SESSION['sessionAdmin'][0]['eCodUsuario']).
 														" ORDER BY be.fhFechaEvento DESC";
+
+
 
 $rsEventos = mysql_query($select);
 while($rEvento = mysql_fetch_array($rsEventos))

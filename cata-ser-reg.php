@@ -157,7 +157,7 @@ var regex = /[0-9]/;
 											<tr>
 												<td>
 													
-                                                        <input type="checkbox" id="inventario[eCodInventario][<?=$b?>]" name="inventario[eCodInventario][<?=$b?>]" value="<?=$rPublicacion{'eCodInventario'}?>" <?=($rServicio{'eCodInventario'}) ? 'checked' : ''?>>
+                                                        <input type="checkbox" id="inventario[<?=$b?>][eCodInventario]" name="inventario[<?=$b?>][eCodInventario]" value="<?=$rPublicacion{'eCodInventario'}?>" <?=($rServicio{'eCodInventario'}) ? 'checked' : ''?>>
                                                         
 												</td>
                                                 <td><?=utf8_decode($rPublicacion{'tipo'})?></td>
@@ -165,7 +165,7 @@ var regex = /[0-9]/;
 												<?=($rPublicacion{'tNombre'})?> <?=($rPublicacion{'tMarca'} ? ' | '.$rPublicacion{'tMarca'} : '')?>
 												</td>
 												<td>
-													<input type="text" size="4" name="inventario[ePiezas][<?=$b?>]" id="inventario[ePiezas][<?=$b?>]" class="form-control" placeholder="10" value="<?=$rServicio{'ePiezas'}?>" onblur="validaNumero(this.value);">
+													<input type="text" size="4" name="inventario[<?=$b?>][ePiezas]" id="inventario[<?=$b?>][ePiezas]" class="form-control" placeholder="10" value="<?=$rServicio{'ePiezas'}?>" onblur="validaNumero(this.value);">
 												</td>
                                             </tr>
 											<?

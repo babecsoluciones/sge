@@ -183,6 +183,8 @@ class clSis
 	//Secciones
 	public function validarPermiso($seccion)
 	{
+        unset($_SESSION['bAll']);
+        
 		$bAll = $_SESSION['sessionAdmin'][0]['bAll'];
 		$select = 	"SELECT * FROM SisSeccionesPerfiles ".
 					($bAll ? "" : " WHERE eCodPerfil = ".$_SESSION['sessionAdmin'][0]['eCodPerfil']." AND tCodSeccion = '".$seccion."'");
@@ -191,16 +193,19 @@ class clSis
 		$rSeccion = mysql_fetch_array($rsSeccion);
 		if($rSeccion{'bAll'} || $bAll)
 		{
+            $_SESSION['bAll'] = 1;
 			return true;
 		}
         else
         {
+            $_SESSION['bAll'] = 0;
             return false;
         }
 	}
     
     public function validarEliminacion($seccion)
 	{
+        unset($_SESSION['bDelete']);
 		$bAll = $_SESSION['sessionAdmin'][0]['bAll'];
 		$select = 	"SELECT * FROM SisSeccionesPerfiles ".
 					($bAll ? "" : " WHERE eCodPerfil = ".$_SESSION['sessionAdmin'][0]['eCodPerfil']." AND tCodSeccion = '".$seccion."'");
@@ -209,10 +214,12 @@ class clSis
 		$rSeccion = mysql_fetch_array($rsSeccion);
 		if($rSeccion{'bDelete'} || $bAll)
 		{
+            $_SESSION['bDelete'] = 1;
 			return true;
 		}
         else
         {
+            $_SESSION['bDelete'] = 0;
             return false;
         }
 	}

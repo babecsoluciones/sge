@@ -14,6 +14,7 @@ session_start();
 $bAll = $clSistema->validarPermiso(obtenerScript());
 $bDelete = $clSistema->validarEliminacion(obtenerScript());
 
+
 date_default_timezone_set('America/Mexico_City');
 
 if(!$_SESSION['sessionAdmin'] || (!$_GET['tAccion'] && !$_GET['tTipo'] && !$_GET['tSeccion']))

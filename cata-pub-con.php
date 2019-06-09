@@ -4,6 +4,9 @@ require_once("cls/cls-sistema.php");
 $clSistema = new clSis();
 session_start();
 
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
+
 ?>
 <div class="row">
                             <div class="col-lg-9">

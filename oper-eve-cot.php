@@ -6,8 +6,8 @@ include("../inc/fun-ini.php");
 $clSistema = new clSis();
 session_start();
 
-$bAll = $clSistema->validarPermiso(obtenerScript());
-$bDelete = $clSistema->validarEliminacion(obtenerScript());
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
 
 $select = "SELECT be.*, cc.tNombres, cc.tApellidos FROM BitEventos be INNER JOIN CatClientes cc ON cc.eCodCliente = be.eCodCliente WHERE be.eCodEvento = ".$_GET['val'];
 //echo $select;
@@ -255,11 +255,11 @@ $rsClientes = mysql_query($select);
 											<tr id="paq<?=$i?>">
                                                 <td><i class="far fa-trash-alt" onclick="deleteRow(<?=$i?>)"></i></td>
                                                 <td>
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCodServicio]" id="cotizacion[<?=$i?>][eCodServicio]" value="<?=$rPublicacion{'eCodServicio'}?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCantidad]" id="cotizacion[<?=$i?>][eCantidad]" value="<?=$rPublicacion{'eCantidad'}?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCodTipo]" id="cotizacion[<?=$i?>][eCodTipo]" value="<?=$rPublicacion{'eCodTipo'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCodServicio]" id="cotizacion[<?=$i;?>][eCodServicio]" value="<?=$rPublicacion{'eCodServicio'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCantidad]" id="cotizacion[<?=$i;?>][eCantidad]" value="<?=$rPublicacion{'eCantidad'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCodTipo]" id="cotizacion[<?=$i;?>][eCodTipo]" value="<?=$rPublicacion{'eCodTipo'}?>">
                                                     <input type="hidden" name="totalServ<?=$i?>" id="totalServ<?=$i?>" value="<?=($rPublicacion{'dPrecioVenta'}*$rPublicacion{'eCantidad'})?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][dMonto]" id="cotizacion[<?=$i?>][dMonto]" value="<?=($rPublicacion{'dMonto'})?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][dMonto]" id="cotizacion[<?=$i;?>][dMonto]" value="<?=($rPublicacion{'dMonto'})?>">
                                                     <?=$rPublicacion{'tNombre'}?>
                                                 </td>
                                                 <td>
@@ -288,11 +288,11 @@ $rsClientes = mysql_query($select);
 											<tr id="paq<?=$i?>">
                                                 <td><i class="far fa-trash-alt" onclick="deleteRow(<?=$i?>)"></i></td>
                                                 <td>
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCodServicio]" id="cotizacion[<?=$i?>][eCodServicio]" value="<?=$rPublicacion{'eCodServicio'}?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCantidad]" id="cotizacion[<?=$i?>][eCantidad]" value="<?=$rPublicacion{'eCantidad'}?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][eCodTipo]" id="cotizacion[<?=$i?>][eCodTipo]" value="<?=$rPublicacion{'eCodTipo'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCodServicio]" id="cotizacion[<?=$i;?>][eCodServicio]" value="<?=$rPublicacion{'eCodServicio'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCantidad]" id="cotizacion[<?=$i;?>][eCantidad]" value="<?=$rPublicacion{'eCantidad'}?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][eCodTipo]" id="cotizacion[<?=$i;?>][eCodTipo]" value="<?=$rPublicacion{'eCodTipo'}?>">
                                                     <input type="hidden" name="totalServ<?=$i?>" id="totalServ<?=$i?>" value="<?=($rPublicacion{'dPrecioVenta'}*$rPublicacion{'eCantidad'})?>">
-                                                    <input type="hidden" name="cotizacion[<?=$i?>][dMonto]" id="cotizacion[<?=$i?>][dMonto]" value="<?=($rPublicacion{'dMonto'})?>">
+                                                    <input type="hidden" name="cotizacion[<?=$i;?>][dMonto]" id="cotizacion[<?=$i;?>][dMonto]" value="<?=($rPublicacion{'dMonto'})?>">
                                                     <?=$rPublicacion{'tNombre'}?>
                                                 </td>
                                                 <td>
@@ -393,9 +393,9 @@ $rsClientes = mysql_query($select);
     var row = table.insertRow(x);
     row.id="paq"+(nIndice);
     row.innerHTML = '<td style="padding:5px;"><i class="far fa-trash-alt" onclick="deleteRow('+nIndice+')"></i><input type="hidden" name="cotizacion['+nIndice+'][eCodTipo]" id="cotizacion[eCodTipo]['+nIndice+']" value="'+eCodTipo+'"></td>';
-    row.innerHTML += '<td><input type="hidden" name="cotizacion['+nIndice+'][eCodServicio]" id="cotizacion[eCodServicio]['+nIndice+']" value="'+codigo.value+'">'+tPaquete+'</td>';
-    row.innerHTML += '<td><input type="hidden" name="cotizacion['+nIndice+'][eCantidad]" id="cotizacion[eCantidad]['+nIndice+']" value="'+cantidad.value+'">'+cantidad.value+'</td>';
-	row.innerHTML += '<td id="dTotal'+nIndice+'"><input type="hidden" id="cotizacion[dMonto]['+nIndice+']" name="cotizacion['+nIndice+'][dMonto]" value="'+((!bCortesia) ? total.toFixed(2) : 0)+'"><input type="hidden" id="totalServ'+nIndice+'" value="'+((!bCortesia) ? total.toFixed(2) : 0)+'">$'+((!bCortesia) ? total.toFixed(2) : 0)+'</td>';
+    row.innerHTML += '<td><input type="hidden" name="cotizacion['+nIndice+'][eCodServicio]" id="cotizacion['+nIndice+'][eCodServicio]" value="'+codigo.value+'">'+tPaquete+'</td>';
+    row.innerHTML += '<td><input type="hidden" name="cotizacion['+nIndice+'][eCantidad]" id="cotizacion['+nIndice+'][eCantidad]" value="'+cantidad.value+'">'+cantidad.value+'</td>';
+	row.innerHTML += '<td id="dTotal'+nIndice+'"><input type="hidden" id="cotizacion['+nIndice+'][dMonto]" name="cotizacion['+nIndice+'][dMonto]" value="'+((!bCortesia) ? total.toFixed(2) : 0)+'"><input type="hidden" id="totalServ'+nIndice+'" value="'+((!bCortesia) ? total.toFixed(2) : 0)+'">$'+((!bCortesia) ? total.toFixed(2) : 0)+'</td>';
 
 nIndice++;
 

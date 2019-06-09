@@ -1,0 +1,14 @@
+UPDATE BitEventos SET
+                            fhFechaEvento = '2019-06-01 00:00',
+                            tmHoraMontaje = '15:00:00',
+                            tDireccion = 'TGFjYW5kb25lcyAgNTYgQ29sLiBQZWRyZWdhbCBkZSBsYXMgw4FndWlsYXMsICBlbnRyZSBPdG9taWVzIHkgVmVzdWJpby4gQWxjYWxkaWEgVGxhcGFu',
+                            tObservaciones = 'Vm9sdGFqZSAxMjIsIHN1YmlyIDMgcGlzb3MgcG9yIGVzY2FsZXJhIGRhcsOhIHByb3BpbmEuDQpUYWwgdmV6IHBhZ3VlIDIgaG9yYXMgcGFyYSBxdWUgZGUgcXVlZGUgZWwgbW9iaWxpYXJpby4NCkVxdWlwbyBkZSBjb2N0ZWxlcmlh',
+                            bIVA = NULL
+                            WHERE eCodEvento = 0000140
+
+DELETE FROM RelEventosPaquetes WHERE eCodEvento = 0000140
+
+INSERT INTO RelEventosPaquetes (eCodEvento, eCodServicio, eCantidad,eCodTipo,dMonto) VALUES (0000140, 36, 1, 1, 7600.00)
+
+INSERT INTO RelEventosPaquetes (eCodEvento, eCodServicio, eCantidad,eCodTipo,dMonto) VALUES (0000140, 42, 1, 1, 9600.00)
+

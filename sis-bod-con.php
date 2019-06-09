@@ -2,12 +2,11 @@
 require_once("cnx/swgc-mysql.php");
 require_once("cls/cls-sistema.php");
 require_once("lstTiposDocumentos.php");
-
 $clSistema = new clSis();
 session_start();
 
-$bAll = $clSistema->validarPermiso(obtenerScript());
-$bDelete = $clSistema->validarEliminacion(obtenerScript());
+$bAll = $_SESSION['bAll'];
+$bDelete = $_SESSION['bDelete'];
 
 $fhFechaInicio = $_POST['fhFechaConsulta'] ? date('Y-m-d',strtotime($_POST['fhFechaConsulta'])).' 00:00:00' : date('Y-m-d').' 00:00:00';
 $fhFechaTermino = $_POST['fhFechaConsulta'] ? date('Y-m-d',strtotime($_POST['fhFechaConsulta'])).' 23:59:59' : date('Y-m-d').' 23:59:59';
@@ -29,6 +28,7 @@ $fhFechaTermino = "'".$fhFechaTermino."'";
         <form id="Datos" name="Datos" method="post" action="<?=$_SERVER['REQUEST_URI']?>">
             <!--<input type="text" id="datepicker" onchange="obtenerFecha()" value="<?=($_POST['fhFechaConsulta'] ? date('m/d/Y',strtotime("+1 month",strtotime($_POST['fhFechaConsulta']))) : '')?>" placeholder="Fecha a Consultar">-->
     <input type="hidden" name="fhFechaConsulta" id="fhFechaConsulta">
+    <input type="hidden" name="bAll" id="bAll" value="<?=$bAll;?>">
             <div id="tFechaConsulta"><?=date('d/m/Y');?></div>
     <input type="submit" class="btn btn-info" value="Consultar" style="display:none;">
     </form>

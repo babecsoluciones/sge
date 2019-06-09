@@ -108,9 +108,17 @@ $eCodEvento = $data->eCodEvento ? $data->eCodEvento : false;
                             bIVA = $bIVA
                             WHERE eCodEvento = $eCodEvento";
             $rsEvento = mysql_query($query);
+            
+            $pf = fopen("logEventos.txt","w");
+            fwrite($pf,$query."\n\n");
+            
+            
             if($rsEvento)
             {
-                mysql_query("DELETE FROM RelEventosPaquetes WHERE eCodEvento = $eCodEvento");
+                $delete = "DELETE FROM RelEventosPaquetes WHERE eCodEvento = $eCodEvento";
+                mysql_query($delete);
+                
+                fwrite($pf,$delete."\n\n");
                 
                 $items = $data->cotizacion;
                 
@@ -122,6 +130,8 @@ $eCodEvento = $data->eCodEvento ? $data->eCodEvento : false;
                     $dMonto = $cotizacion->dMonto;
                     
                     $insert = "INSERT INTO RelEventosPaquetes (eCodEvento, eCodServicio, eCantidad,eCodTipo,dMonto) VALUES ($eCodEvento, $eCodServicio, $eCantidad, $eCodTipo, $dMonto)";
+                    
+                    fwrite($pf,$insert."\n\n");
                     
                     $rs = mysql_query($insert);
 
@@ -141,6 +151,9 @@ $eCodEvento = $data->eCodEvento ? $data->eCodEvento : false;
             {
                 $errores[] = 'Error al insertar la cotización del evento '.mysql_error();
             }
+            
+            fclose($pf);
+            
         }
 
 echo json_encode(array("exito"=>((!sizeof($errores)) ? 1 : 0), 'errores'=>$errores));
